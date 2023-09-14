@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `todo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE IF NOT EXISTS `todo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `todo`;
 DROP TABLE IF EXISTS `task`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
