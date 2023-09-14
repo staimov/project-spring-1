@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  my-mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '63306:3306'
+    volumes:
+      - my-mysql:/var/lib/mysql
+    networks:
+      - my-network
+volumes:
+  my-mysql:
+    driver: local
+networks:
+  my-network:
+    driver: bridge
