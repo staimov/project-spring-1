@@ -5,12 +5,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.staimov.domain.Task;
 
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class TaskDAOImpl implements TaskDAO {
     private final SessionFactory sessionFactory;
 
@@ -44,6 +46,7 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Task createOrUpdate(Task task) {
         Preconditions.checkNotNull(task, "Task is null");
         getSession().saveOrUpdate(task);
@@ -51,13 +54,14 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void delete(Task task) {
         Preconditions.checkNotNull(task, "Task is null");
         getSession().remove(task);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void deleteById(int id) {
         final Task task = getById(id);
         delete(task);
