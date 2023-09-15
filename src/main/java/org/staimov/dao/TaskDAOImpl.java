@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.staimov.domain.Task;
 
 import java.util.List;
@@ -43,9 +44,10 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
-    public void createOrUpdate(Task task) {
+    public Task createOrUpdate(Task task) {
         Preconditions.checkNotNull(task);
         getSession().saveOrUpdate(task);
+        return task;
     }
 
     @Override
@@ -55,6 +57,7 @@ public class TaskDAOImpl implements TaskDAO {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         final Task task = getById(id);
         delete(task);

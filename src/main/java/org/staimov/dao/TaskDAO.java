@@ -14,7 +14,7 @@ public interface TaskDAO {
 
     List<Task> getPage(int offset, int count);
 
-    void createOrUpdate(Task task);
+    Task createOrUpdate(Task task);
 
     void delete(Task task);
 
