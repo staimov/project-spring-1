@@ -34,7 +34,14 @@ public class TaskServiceImpl implements TaskService {
         Preconditions.checkState(task != null, "Task not found");
         task.setDescription(description);
         task.setStatus(status);
-        return taskDAO.createOrUpdate(task);
+
+        // Save is redundant, because
+        // when a method is transactional, then entities retrieved within this transaction are in the managed state,
+        // which means that all changes made to them will be populated to the database automatically
+        // at the end of the transaction
+        //return taskDAO.createOrUpdate(task);
+
+        return task;
     }
 
     @Override
