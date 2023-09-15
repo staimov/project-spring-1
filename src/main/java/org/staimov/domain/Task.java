@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "task")
+@Table(name = "task", schema = "todo")
 @Getter
 @Setter
 @ToString
@@ -18,5 +18,6 @@ public class Task {
     private String description;
 
     @Enumerated(EnumType.ORDINAL)
+    @Column(columnDefinition = "int")
     private Status status;
 }
