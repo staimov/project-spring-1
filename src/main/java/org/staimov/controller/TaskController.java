@@ -4,12 +4,14 @@ import com.google.common.base.Preconditions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.staimov.domain.Status;
 import org.staimov.domain.Task;
 import org.staimov.service.TaskService;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class TaskController {
     private final TaskService taskService;
 
@@ -24,22 +26,25 @@ public class TaskController {
 
         List<Task> tasks = taskService.getPage((page - 1) * limit, limit);
         model.addAttribute("tasks", tasks);
+        model.addAttribute("current_page", page);
         return "tasks";
     }
 
     @PostMapping("/{id}")
-    public void edit(Model model,
+    public String edit(Model model,
                         @PathVariable Integer id,
                         @RequestBody TaskInfo info) {
 
         Preconditions.checkArgument(id != 0 && id > 0, "Invalid id");
         taskService.edit(id, info.getDescription(), info.getStatus());
+        return tasks(model, 1, 10);
     }
 
     @PostMapping("/")
-    public void create(Model model,
+    public String create(Model model,
                      @RequestBody TaskInfo info) {
         taskService.create(info.getDescription(), info.getStatus());
+        return tasks(model, 1, 10);
     }
 
     @DeleteMapping("/{id}")
@@ -48,6 +53,6 @@ public class TaskController {
 
         Preconditions.checkArgument(id != 0 && id > 0, "Invalid id");
         taskService.delete(id);
-        return "tasks";
+        return tasks(model, 1, 10);
     }
 }
