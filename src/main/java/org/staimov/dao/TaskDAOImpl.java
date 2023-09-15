@@ -45,14 +45,14 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public Task createOrUpdate(Task task) {
-        Preconditions.checkNotNull(task);
+        Preconditions.checkNotNull(task, "Task is null");
         getSession().saveOrUpdate(task);
         return task;
     }
 
     @Override
     public void delete(Task task) {
-        Preconditions.checkNotNull(task);
+        Preconditions.checkNotNull(task, "Task is null");
         getSession().remove(task);
     }
 

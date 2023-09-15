@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task edit(int id, String description, Status status) {
         Task task = taskDAO.getById(id);
-        Preconditions.checkState(task != null);
+        Preconditions.checkState(task != null, "Task not found");
         task.setDescription(description);
         task.setStatus(status);
         return taskDAO.createOrUpdate(task);
