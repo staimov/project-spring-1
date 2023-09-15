@@ -2,14 +2,10 @@ package org.staimov.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -21,13 +17,11 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DBConfig {
     @Bean
-    public LocalSessionFactoryBean sessionFactory(
-            DataSource dataSource,
-            Properties hibernateProperties) {
+    public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
+        sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("org.staimov.domain");
-        sessionFactory.setHibernateProperties(hibernateProperties);
+        sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
