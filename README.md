@@ -7,7 +7,7 @@ https://javarush.com/quests/lectures/jru.module5.lecture01
 
 ## Screenshot
 
-![screenshot](./src/main/webapp/image/screenshot.png?raw=true)
+![screenshot](src/main/webapp/image/screenshot.png?raw=true)
 
 ## Attributions
 
