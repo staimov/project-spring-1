@@ -39,7 +39,8 @@ function editTask(id) {
 
     let descriptionCell = cells[1];
     descriptionCell.innerHTML =
-        "<input id='description_input_" + id + "' type='text' value='" + descriptionCell.innerHTML + "'>";
+        "<input id='description_input_" + id + "' class=\"w-75\" type='text' placeholder=\"Enter task description\" " +
+        "value='" + descriptionCell.innerHTML + "'>";
 
     let statusCell = cells[2];
     let statusDropdownId = "#status_dropdown_" + id;
@@ -55,8 +56,7 @@ function getStatusDropdownHtml(id) {
     }
 
     let statusDropdownId = "status_dropdown_" + id;
-    return "<label for='status'><label>"
-        + "<select id=" + statusDropdownId + " name='status'/>"
+    return "<select id=" + statusDropdownId + ">"
         + "<option value='IN_PROGRESS'>IN_PROGRESS</option>"
         + "<option value='DONE'>DONE</option>"
         + "<option value='PAUSED'>PAUSED</option>"
@@ -70,17 +70,34 @@ function saveTask(id){
     }
 
     let url = "/" + id;
-    let description_value = $("#description_input_" + id).val();
-    let status_value = $("#status_dropdown_" + id).val();
+    let descriptionValue = $("#description_input_" + id).val();
+    let statusValue = $("#status_dropdown_" + id).val();
 
     $.ajax({
         url: url,
         type: 'POST',
         datatype: 'json',
         contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify({"description": description_value, "status": status_value})
+        data: JSON.stringify({"description": descriptionValue, "status": statusValue})
     })
 
     setTimeout(() => {
         document.location.reload();}, 300)
+}
+
+function addTask(){
+    let descriptionValue = $("#description_input_new").val();
+    let statusValue = $("#status_dropdown_new").val();
+
+    $.ajax({
+        url: "/",
+        type: 'POST',
+        datatype: 'json',
+        contentType: 'application/json;charset=UTF-8',
+        async: false,
+        data: JSON.stringify({"description": descriptionValue, "status": statusValue})
+    });
+
+    setTimeout(() => {
+        document.location.reload();}, 300);
 }

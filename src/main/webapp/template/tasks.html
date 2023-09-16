@@ -19,14 +19,14 @@
     <title>To-Do List</title>
 </head>
 <body>
-<div class="container">
+<div class="container d-flex flex-column">
     <h1 class="display-4">To-Do List</h1>
     <hr>
 
     <table class="table table-bordered border-primary table-hover">
         <thead class="bg-secondary text-light">
         <tr>
-            <th>Id</th>
+            <th class="text-center">Id</th>
             <th>Description</th>
             <th>Status</th>
             <th></th>
@@ -34,7 +34,7 @@
         </thead>
         <tbody>
         <tr th:each="task,number : ${tasks}">
-            <td th:text="${task.id}"/>
+            <td class="text-center" th:text="${task.id}"/>
             <td th:text="${task.description}" th:id="'description_' + ${task.id}"/>
             <td th:text="${task.status}" th:id="'status_' + ${task.id}"/>
             <td>
@@ -47,6 +47,31 @@
                             class="btn btn-danger btn-sm mx-1 col-5"
                             th:onclick="'deleteTask(' + ${task.id} + ')'">
                         <i class="fas fa-trash-alt"></i> Delete</button>
+                </div>
+            </td>
+        </tr>
+
+        <tr class="bg-secondary text-light">
+            <td colspan="4" class="text-center">Add new task</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input class="w-75" id="description_input_new" type="text" value="" placeholder="Enter task description">
+            </td>
+            <td>
+                <select id="status_dropdown_new">
+                    <option value="IN_PROGRESS">IN_PROGRESS</option>
+                    <option value="DONE">DONE</option>
+                    <option value="PAUSED">PAUSED</option>
+                </select>
+            </td>
+            <td>
+                <div class="row justify-content-md-center">
+                    <button id=add_button_new
+                            class="btn btn-success btn-sm mx-1 col-5"
+                            onclick=addTask()>
+                        <i class="fas fa-save"></i> Add</button>
                 </div>
             </td>
         </tr>
