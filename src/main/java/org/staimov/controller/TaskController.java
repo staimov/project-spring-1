@@ -9,6 +9,8 @@ import org.staimov.domain.Task;
 import org.staimov.service.TaskService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/")
@@ -26,7 +28,10 @@ public class TaskController {
 
         List<Task> tasks = taskService.getPage((page - 1) * limit, limit);
         model.addAttribute("tasks", tasks);
-        model.addAttribute("current_page", page);
+        model.addAttribute("currentPage", page);
+        int totalPages = (int) Math.ceil((double) taskService.count() / limit);
+        model.addAttribute("totalPages", totalPages);
+
         return "tasks";
     }
 
