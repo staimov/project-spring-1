@@ -13,6 +13,6 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT  IGNORE INTO `task` VALUES (1,'aaa',1),(2,'bbb',2),(3,'ccc',0),(4,'ddd',1),(5,'eee',2),(6,'fff',0),(7,'ggg',1),(8,'hhh',2),(9,'jjj',0),(10,'kkk',1),(11,'lll',2),(12,'mmm',0),(13,'nnn',1),(14,'ooo',2),(15,'ppp',0);
+INSERT  IGNORE INTO `task` VALUES (1,'Wake up',1),(2,'Eat my breakfast',2),(3,'Call Yulia',0),(4,'Buy milk',1),(5,'Learn Java',2),(6,'Play the guitar',0),(7,'Read a book',1),(8,'Play hockey',2),(9,'Shave the cat',0),(10,'Reward yourself with a nap',1),(11,'Ride a bike',2),(12,'Listen cool music',0),(13,'Go to cinema',1),(14,'Have a dinner',2),(15,'Go to bed',0);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
