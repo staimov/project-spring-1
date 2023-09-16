@@ -1,5 +1,14 @@
 version: '3.9'
 services:
+  my-server:
+    build: /
+    ports:
+      - '8080:8080'
+    depends_on:
+      my-mysql:
+        condition: service_healthy
+    networks:
+      - my-network
   my-mysql:
     image: mysql:latest
     restart: unless-stopped
@@ -7,10 +16,17 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - '63306:3306'
+    expose:
+      - '3306'
     volumes:
       - my-mysql:/var/lib/mysql
     networks:
       - my-network
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=root --execute \"show databases;\""
+      interval: 2s
+      timeout: 30s
+      retries: 5
 volumes:
   my-mysql:
     driver: local
