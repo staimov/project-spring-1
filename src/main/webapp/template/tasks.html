@@ -41,11 +41,11 @@
                 <div class="row justify-content-md-center">
                     <button th:id="'edit_button_' + ${task.id}"
                             class="btn btn-info btn-sm mx-1 col-5"
-                            th:onclick="'edit_task(' + ${task.id} + ')'">
+                            th:onclick="'editTask(' + ${task.id} + ')'">
                         <i class="fas fa-pencil-alt"></i> Edit</button>
                     <button th:id="'delete_button_' + ${task.id}"
                             class="btn btn-danger btn-sm mx-1 col-5"
-                            th:onclick="'delete_task(' + ${task.id} + ')'">
+                            th:onclick="'deleteTask(' + ${task.id} + ')'">
                         <i class="fas fa-trash-alt"></i> Delete</button>
                 </div>
             </td>
@@ -82,6 +82,8 @@
 
 <!--Jquery JS-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="/script/task.js"></script>
 
 </body>
 </html>
