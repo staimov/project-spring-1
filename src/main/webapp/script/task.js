@@ -7,7 +7,7 @@ function deleteTask(id) {
     if (!(confirm('Are you sure you want to delete the task (id = ' + id + ')?')))
         return;
 
-    let url = "/" + id;
+    let url = getBaseUrl() + id;
     $.ajax({
         url: url,
         type: 'DELETE',
@@ -69,7 +69,7 @@ function saveTask(id){
         return;
     }
 
-    let url = "/" + id;
+    let url = getBaseUrl() + id;
     let descriptionValue = $("#description_input_" + id).val();
     let statusValue = $("#status_dropdown_" + id).val();
 
@@ -90,7 +90,7 @@ function addTask(){
     let statusValue = $("#status_dropdown_new").val();
 
     $.ajax({
-        url: "/",
+        url: getBaseUrl(),
         type: 'POST',
         datatype: 'json',
         contentType: 'application/json;charset=UTF-8',
@@ -100,4 +100,10 @@ function addTask(){
 
     setTimeout(() => {
         document.location.reload();}, 300);
+}
+
+function getBaseUrl() {
+    let currentPath = window.location.href;
+    let endPosition = currentPath.indexOf('?');
+    return currentPath.substring(0, endPosition);
 }
