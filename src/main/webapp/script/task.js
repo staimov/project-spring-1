@@ -103,7 +103,6 @@ function addTask(){
 }
 
 function getBaseUrl() {
-    let currentPath = window.location.href;
-    let endPosition = currentPath.indexOf('?');
-    return currentPath.substring(0, endPosition);
+    let url = window.location.href;
+    return url.substring(0, url.lastIndexOf("/") + 1);
 }
