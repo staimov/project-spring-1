@@ -26,38 +26,35 @@ public class TaskController {
                             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                             @RequestParam(value = "limit", required = false, defaultValue = "10") int limit) {
 
+        int totalPages = (int) Math.ceil((double) taskService.count() / limit);
         List<Task> tasks = taskService.getPage((page - 1) * limit, limit);
         model.addAttribute("tasks", tasks);
         model.addAttribute("currentPage", page);
-        int totalPages = (int) Math.ceil((double) taskService.count() / limit);
         model.addAttribute("totalPages", totalPages);
 
         return "tasks";
     }
 
     @PostMapping("/{id}")
-    public String edit(Model model,
+    public void edit(Model model,
                         @PathVariable Integer id,
                         @RequestBody TaskInfo info) {
 
         Preconditions.checkArgument(id != 0 && id > 0, "Invalid id");
         taskService.edit(id, info.getDescription(), info.getStatus());
-        return tasks(model, 1, 10);
     }
 
     @PostMapping("/")
-    public String create(Model model,
+    public void create(Model model,
                      @RequestBody TaskInfo info) {
         taskService.create(info.getDescription(), info.getStatus());
-        return tasks(model, 1, 10);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(Model model,
+    public void delete(Model model,
                      @PathVariable Integer id) {
 
         Preconditions.checkArgument(id != 0 && id > 0, "Invalid id");
         taskService.delete(id);
-        return tasks(model, 1, 10);
     }
 }
