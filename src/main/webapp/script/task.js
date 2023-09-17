@@ -11,10 +11,10 @@ function deleteTask(id) {
     $.ajax({
         url: url,
         type: 'DELETE',
-        success: function () {
-            window.location.reload();
-        }
     });
+
+    setTimeout(() => {
+        document.location.reload();}, 300)
 }
 
 function editTask(id) {
