@@ -1,4 +1,4 @@
-[![My Skills](https://skillicons.dev/icons?i=java,spring,hibernate,mysql,html,bootstrap,js,jquery,docker&theme=light)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=java,maven,spring,hibernate,mysql,html,bootstrap,js,jquery,docker&theme=light)](https://skillicons.dev)
 # project-spring-1
 ### To-Do Task List
 
